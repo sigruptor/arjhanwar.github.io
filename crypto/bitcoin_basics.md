@@ -45,7 +45,7 @@ nearby node in the bitcoin network. The first node to hear about the transaction
  - The idea is that we need to scale based on this small block size.
  - Consumes a lot of evergy to create/add one block, brings huge environmental concerns.
 
- #### Forks
+#### Forks
   - Each of the node in network should follow the same rules, if part of network starts following other protocol, the network would diverge and it would practically 
   be impossible to converge them. Bitcoin cash is one example of one of the forks.
   
@@ -74,5 +74,4 @@ nearby node in the bitcoin network. The first node to hear about the transaction
 #### References
 1. https://medium.com/free-code-camp/explain-bitcoin-like-im-five-73b4257ac833
 2. https://arstechnica.com/tech-policy/2020/12/how-bitcoin-works/
-3. https://www.lopp.net/bitcoin-information/getting-started.html
-4. 
+3. https://www.lopp.net/bitcoin-information/getting-started.html 
