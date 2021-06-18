@@ -6,6 +6,10 @@ This would be my effort to contribute back to the community, hoping to share my 
 
 **[Privacy Lessons from GDPR](privacy/learnings.md)**
 
+**[Bitcoin Basics - How it works](crypto/bitcoin_basics.md)**
+
+**[Health - Blood Count](health/blood_count.md)**
+
 ### Contact
 Would love to know more about you as well and learn from you. Please reach out to me on [github](https://github.com/sigruptor), [In](), [Mail]
 
