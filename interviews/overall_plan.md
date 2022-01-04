@@ -29,6 +29,14 @@ i) Median of stream ii) Percentile
 8. Dive deep and 
 9. customer impact
 
+#### Technologies Experience
+1. Kubernetes
+2. AWS
+3. Privacy - Guardian
+4. Big Data i) Kafka ii) Stream Processing (Spark/Flink) 
+5. Airflow
 
 #### Beyond current projects
 - Things leart outside current work 
+1. Crypto
+
