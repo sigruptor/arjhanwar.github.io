@@ -66,3 +66,70 @@ partition(a, start, end) {
 - Not Stable
 - In Place
 - Not Adaptive
+
+### Merge Sort
+- Classic divide and conquer problem, split array into 2 recursively, merge them.
+- Very predictable and only stable O(nlogn) algorithm.
+- Takes between .5log(n) and log(n) comparisons and between log(n) and 1.5 log(n) swaps per element. 
+- Minima for already sorted data and maxima for random data.
+- If O(n) extra space is not a concern, this is an excellent choice and used mostly for external sort
+
+```
+mergeSort(a[], start, end) {
+   if (end > start) {
+     int mid = (start+end)/2;
+     mergeSort(a, start, mid-1);
+     mergeSort(a, mid, end);
+     merge(a, start, mid, end);
+   }
+}
+
+merge(a,start,mid,end) {
+  int temp[end-start+1];
+  i=start;j=mid+1;
+  k=0;
+  
+  while(i<=mid && j<=end) {
+  	if (a[i]<a[j]) {
+		temp[k++]=a[i++]  
+	} else {
+		temp[k++]=a[j++]
+	}
+  }
+  
+  // copy remaining i.ss
+  while(i<=mid) {
+  	temp[k++]=a[i++];
+  }
+  // copy remaining j.ss
+  while(j<=end) {
+  	temp[k++]=a[j++];
+  }
+  
+  //copy temp to a
+  for (int i=0;i<end-start+1;i++) {
+  	a[i]=temp[i];
+  }
+}
+```
+
+##### Complexity
+**TimeComplexity**
+- O(nlog(n)) -> min for already sorted data
+
+**Space Complexity**
+- O(n) - extra space
+- Extra O(log(n)) - for linked list (recursions)
+
+##### Useful
+- Stability is needed
+- Sorting of linked lists
+- And when random access is much more expensive than sequential access (external sorting on tape)
+- There do exist linear time in-place merge algorithms for the last step of the algorithm, but they are both expensive and complex. The complexity is justified for applications such as external sorting when Θ(n) extra space is not available.
+
+##### Properties
+- Stable
+- O(n) extra space for arrays
+- Requires O(logn) extra space for linked list (recursion)
+- Not adaptive
+- Does not require random access to data
