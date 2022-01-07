@@ -133,3 +133,55 @@ merge(a,start,mid,end) {
 - Requires O(logn) extra space for linked list (recursion)
 - Not adaptive
 - Does not require random access to data
+
+
+### Heap Sort
+- Heapify n/2 elements, highest element at the top of the heap
+- 
+
+```
+heapSort(a) {
+	for (int i=a.length/2;i>=0;i--) {
+		heapify(a,i);
+	}
+	
+	for (int i=a.length-1;i>=0;i--) {
+		swap(a,i,0);
+		heapify(a,0);
+	}
+}
+
+heapify(a, i) {
+	left = 2*i+1;
+	right = 2*i+2;
+	largest = i;
+	
+	// if left child is greater than largest
+	if (left < n && a[left]> a[largest]) {
+		largest = left;
+	}
+	
+	// if right child is greater
+	if (right<n && a[right]>a[largest]) {
+		largest = right;
+	}
+	
+	if (i!=largest) {
+		swap(a,i,largest)
+		heapify(a,largest)
+	}
+}
+```
+
+##### Complexity
+**Time Complexity**
+-  O(nlogn) for all cases (best,worst, avg)
+
+**Space Complexity**
+-  O(lg(n)) space for the recursive call stack. However, the tail recursion in heapify() is easily converted to iteration, which yields the O(1)
+
+##### Properties
+- Not stable
+- Not really adaptive
+- In the nearly sorted case, the heapify phase destroys the original order. In the reversed case, the heapify phase is as fast as possible since the array starts in heap order, but then the sortdown phase is typical
+
