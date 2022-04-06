@@ -32,6 +32,10 @@ learnt to build systems end-end and how to productionize them.
 #### Event Driven Architecture - Processing post Ingestion
 
 
+#### S3 Disaster Recovery 
+- Automation with Pulumi
+
+
 #### Infrastructure Setup
 ##### Resources with Pulumi 
 ##### Deployment with Helm charts
