@@ -1,4 +1,4 @@
-### Food Choices
+### Sustainable Eating
 
 #### What is sustainable Eating ?
 The way food is produced impacts environment. Today we consume more resources than the earth is producing. Upto 1/3 of all emissions that contribute to global
