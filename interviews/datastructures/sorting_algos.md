@@ -1,5 +1,19 @@
 # Sorting Algorithms
 
+Few Common Terms
+1. **Stability** : Stable Algorithm maintains the relative order of the items with same (equal) sort keys.
+2. **Adaptive** : An algorithm is adaptive if it takes advantage of already sorted elements. These algorithm takes minimum time over already sorted list. For example, if input is already (nearly) sorted then, go for Insertion sort as the time complexity will be O(n). 
+	
+	**_Adaptive Sorting Algorithms_**
+	- InsertionSort
+	- BubbleSort
+
+	**_Non-Adaptive Sorting Algorithms_**
+	- MergeSort
+	- HeapSort
+	- SelectionSort
+	- QuickSort
+
 ### Insertion Sort
 - Loop Invariant arr[1..i] is always sorted.
 - Inserting an element into its correct position wrt 1..i such that arr[1..i] is always sorted.
@@ -137,7 +151,8 @@ merge(a,start,mid,end) {
 
 ### Heap Sort
 - Heapify n/2 elements, highest element at the top of the heap
-- 
+- A heap is a binary tree in which each node has a smaller key than its children; this property is called the heap property or heap invariant.
+
 
 ```
 heapSort(a) {
@@ -180,8 +195,17 @@ heapify(a, i) {
 **Space Complexity**
 -  O(lg(n)) space for the recursive call stack. However, the tail recursion in heapify() is easily converted to iteration, which yields the O(1)
 
+#### Useful
+- When smallest or largest value is needed instantly
+- Finding the order in statistics, 
+- Dealing with priority queues in MST algorithms - Prim’s algorithm and Huffman encoding or data compression
+- Guaranteed O(nlogn) performance
+- We get a partially sorted array if Heapsort is somehow stopped abruptly
+
 ##### Properties
 - Not stable
-- Not really adaptive
+- Not really adaptive (Slightly)
 - In the nearly sorted case, the heapify phase destroys the original order. In the reversed case, the heapify phase is as fast as possible since the array starts in heap order, but then the sortdown phase is typical
+- Cache inefficient
+- Slow as compared to QuickSort
 
