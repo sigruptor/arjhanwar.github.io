@@ -17,7 +17,7 @@ As a backend engineer, I have worked on a variety of projects consisting of diff
 
 **[Sustainability](sustainibility/food/sustainable_eating.md)**
 
-**[Books](books/books_readme.md)** <br/>
+**[Books](books/book_readme.md)** <br/>
 Have captured summary and notes for some of the books that I have read or listened to. My goal with keep summaries is 2 fold
 - To help better understand the content along with longer retention.
 - To be able to come back and look at it (sort of revision) - of some important concepts and lessons.
