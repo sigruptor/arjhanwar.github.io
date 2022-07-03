@@ -40,3 +40,10 @@ i) Median of stream ii) Percentile
 - Things leart outside current work 
 1. Crypto
 
+#### Basic Technologies
+- Difference between gRPC and HTTP/Rest
+- Evolution of Http1/2/3 (QUIC)
+- Dynamo paper
+- Time Series Databases
+
+
