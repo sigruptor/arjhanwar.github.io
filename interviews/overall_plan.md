@@ -45,5 +45,9 @@ i) Median of stream ii) Percentile
 - Evolution of Http1/2/3 (QUIC)
 - Dynamo paper
 - Time Series Databases
+- SOme issues with HBase ?
+- AWS Networking ?
+- Weather or sensor based system
+- Spot instances ?
 
 
