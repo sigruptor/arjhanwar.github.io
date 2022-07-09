@@ -13,6 +13,12 @@ i) Knapsack problem
 i) Median of stream ii) Percentile
 
 #### System Design
+1) Parking Lot
+2) Distributed Cache
+3) Twitter
+4) Social Media - Insta/Facebook
+5) Video Streaming - Netflix/Youtube
+6) Data Pipeline
 
 #### Behavioural
 - Tell me about a time type of questions.
