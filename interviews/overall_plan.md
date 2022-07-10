@@ -23,6 +23,8 @@ i) Median of stream ii) Percentile
 8) Sensor or IOT based system 
 9) Rate Limiter
 10) Concurrent Edit - Google Doc 
+11) ECommerce - Amazon/Flipkart
+12) Delivery business ? Doordash
 
 #### Behavioural
 - Tell me about a time type of questions.
