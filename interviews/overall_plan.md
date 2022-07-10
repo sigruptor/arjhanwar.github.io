@@ -16,16 +16,17 @@ i) Median of stream ii) Percentile
 1) Dynamo Paper
 2) Parking Lot
 3) Distributed Cache
-4) Twitter
-5) Social Media - Insta/Facebook
-6) Video Streaming - Netflix/Youtube
-7) Data Pipeline
-8) Ride sharing (Uber/Lyft)
-9) Sensor or IOT based system 
-10) Rate Limiter
-11) Concurrent Edit - Google Doc 
-12) ECommerce - Amazon/Flipkart
-13) Delivery business ? Doordash
+4) Distributed Key Value Store
+5) Twitter
+6) Social Media - Insta/Facebook
+7) Video Streaming - Netflix/Youtube
+8) Data Pipeline
+9) Ride sharing (Uber/Lyft)
+10) Sensor or IOT based system 
+11) Rate Limiter
+12) Concurrent Edit - Google Doc 
+13) ECommerce - Amazon/Flipkart
+14) Delivery business ? Doordash
 
 #### Behavioural
 - Tell me about a time type of questions.
