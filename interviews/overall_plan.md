@@ -19,6 +19,10 @@ i) Median of stream ii) Percentile
 4) Social Media - Insta/Facebook
 5) Video Streaming - Netflix/Youtube
 6) Data Pipeline
+7) Ride sharing (Uber/Lyft)
+8) Sensor or IOT based system 
+9) Rate Limiter
+10) Concurrent Edit - Google Doc 
 
 #### Behavioural
 - Tell me about a time type of questions.
