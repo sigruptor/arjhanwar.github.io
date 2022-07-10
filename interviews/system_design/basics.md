@@ -43,3 +43,26 @@ Use Relatinal databases:
 Use NoSql Databases:
 - Rapid development: When no structure and allows us to add more types. We can make quick iterations on systems which require frequent update to Data structures.
 - Cloud Storage
+
+_**NOTE:**_
+**Obviously with noSQL databases also, we need to manage relationship or joins at some level, the general recommendation is to do in application code. **
+
+Now that we have a fully functional database, we are able to scale and serve all the clients. But the problem is, the system is slow whenever service has
+to fetch data from Cache.
+
+#### Caching
+In memory cache solutions - Memcache (scales very easily )or Redis (Redis also provides persistent layer)
+
+**1. Caching the query**: We can cache the complex query (as key) and result as the value. This is not so nice, everytime there is an update to even one cell, we need to discard and update the query result again. Also it is hard to delete a complex result, when a particular object expires.
+**2. Caching the object**: Cache the object itself, easy to update/discard.
+Some ideas of objects to cache:
+- user sessions (never use the database!)
+- fully rendered blog articles
+- activity streams
+- user<->friend relationships
+
+
+#### Asynchronism
+Style 1: You do the precomputation in advance (may be at night, or regularly via a cron job) and when the user requests comes, that can be served. e.g. Converting dynamic content of website into html pages on every change.
+Style 2: When a user submits a job e.g. a compute intensive task, the task can be added to the queue and worker queue can handle it. While this task is handled by the backend, user should still be able to navigate and do other things rather than to just wait and sit idle. 
+
