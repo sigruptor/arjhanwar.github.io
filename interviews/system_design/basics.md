@@ -63,6 +63,6 @@ Some ideas of objects to cache:
 
 
 #### Asynchronism
-Style 1: You do the precomputation in advance (may be at night, or regularly via a cron job) and when the user requests comes, that can be served. e.g. Converting dynamic content of website into html pages on every change.
-Style 2: When a user submits a job e.g. a compute intensive task, the task can be added to the queue and worker queue can handle it. While this task is handled by the backend, user should still be able to navigate and do other things rather than to just wait and sit idle. 
+Style 1: You do the precomputation in advance (may be at night, or regularly via a cron job) and when the user requests comes, that can be served. e.g. Converting dynamic content of website into html pages on every change. </br>
+Style 2: When a user submits a job e.g. a compute intensive task, the task can be added to the queue and worker queue can handle it. While this task is handled by the backend, user should still be able to navigate and do other things rather than to just wait and sit idle. </br>
 
