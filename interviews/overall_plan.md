@@ -13,18 +13,19 @@ i) Knapsack problem
 i) Median of stream ii) Percentile
 
 #### System Design
-1) Parking Lot
-2) Distributed Cache
-3) Twitter
-4) Social Media - Insta/Facebook
-5) Video Streaming - Netflix/Youtube
-6) Data Pipeline
-7) Ride sharing (Uber/Lyft)
-8) Sensor or IOT based system 
-9) Rate Limiter
-10) Concurrent Edit - Google Doc 
-11) ECommerce - Amazon/Flipkart
-12) Delivery business ? Doordash
+1) Dynamo Paper
+2) Parking Lot
+3) Distributed Cache
+4) Twitter
+5) Social Media - Insta/Facebook
+6) Video Streaming - Netflix/Youtube
+7) Data Pipeline
+8) Ride sharing (Uber/Lyft)
+9) Sensor or IOT based system 
+10) Rate Limiter
+11) Concurrent Edit - Google Doc 
+12) ECommerce - Amazon/Flipkart
+13) Delivery business ? Doordash
 
 #### Behavioural
 - Tell me about a time type of questions.
