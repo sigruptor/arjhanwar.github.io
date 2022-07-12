@@ -1,5 +1,12 @@
 # System Design Concepts
 
+Few important characteristics:
+1. Availability
+2. Reliability
+3. Scalaibility
+4. Efficiency -> Latency/Throughput
+5. Maintainability/Servicability
+
 ### Scalability
 It is the capability of a system, network or process to grow and manage increased demand. A system needs to scale because of either increase in data volume 
 or increase in amount of work. The target is to be able to achieve this scaling without performance loss.
