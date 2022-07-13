@@ -22,14 +22,14 @@ Many services shoping cart, session management, sales rank, product catalog - ne
 * Dont need complex quering and management functionality provided by RDBMS. The extra functionality requires expensive hardware and skilled personnel
 * Also replication technologies chooses consistency over availability
 
-*Requirements*
+## *Requirements*
 
 1. *Query Model:* Key access uniquely identified by key, state stored as binary objects (blobs). Applications that need to store objects that are relatively small (1MB)
 2. *ACID -* ACID is expensive dynamo trades weaker Consistency. 
 3. *SLAs -* 99.9 percentile - getting even higher percentile decision is not made based on cost-benefit analysis - significant increase in cost to improve performance that much.
 4. Configurable performance and consistency tuning. Give services the control system properties such as durability and consistency, and let them to choose their tradeoffs b/w functionality, performance and cost effectiveness.
 
-*Design Considerations*
+## *Design Considerations*
 
 1. *Consistency:* Strong consistency is expensive and comes at the cost of availability. Optimistic replication where changes are allowed to propagate to replicas in background. It leads to conflicting views, when to resolve them and who resolves them. 
     *When: *during read, people should be able to add things to their cart so writes should be always available. 
@@ -39,7 +39,7 @@ Many services shoping cart, session management, sales rank, product catalog - ne
 4. *Decentralization:* Decentralized peer to peer system.
 5. *Heterogeneity:* Some servers powerful i.e. work distribution proportional to server capabilities.
 
-*System Architecture*
+## *System Architecture*
 
 1. *Interface:* put(key, value, context), 
     context encodes the system metadata about the object that is opaque to caller and includes info such as version of object. Context is stored along with the object such that system can verify the validity of context obj from put request.
@@ -85,7 +85,7 @@ Many services shoping cart, session management, sales rank, product catalog - ne
         2. Gossip based failure view bw all the nodes..but with external discovery it was not needed. Local view of failures was sufficient.
 10. *Adding removing Storage Nodes :* Bootstrapping, it is assigned a set of keys and the other nodes leave the control of those keys. Helps in uniform load distribution 
 
-Problem	Technique	Advantage
+## Problem	Technique	Advantage
 Partitioning	Consistent Hashing	Incremental Scalability
 HA for writes	Vector clocks with reconciliation during reads	Version size decoupled from update rates
 Handling Temp failures	Sloopy quorum and hinted handoff	Provides HA and durability guarantees when some replicas are not available
@@ -107,7 +107,7 @@ Scalable and robust Solutions for
 
 
 
-*Experiences and lessons learned*
+## *Experiences and lessons learned*
 
 1. Business logic specific reconciliation - shopping cart
 2. Time based reconciliation - LWW
