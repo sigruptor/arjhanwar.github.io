@@ -39,6 +39,22 @@ Many services shoping cart, session management, sales rank, product catalog - ne
 4. *Decentralization:* Decentralized peer to peer system.
 5. *Heterogeneity:* Some servers powerful i.e. work distribution proportional to server capabilities.
 
+
+## Related Work
+
+#### DataStorage and Distribution (p2P) (Flat NameSpaces)
+- Search query flooded thru n/w
+- Structured P2P - Globally consistent protocol to ensure thhat any node can efficiently route a search query (bounded number of hops to reduce multi-routing latency.
+- Each pair maintains enough routing info to employ O(1)) routing
+- To allow for concurrent updates, without wide area locking, an update model based on conflict resolution (Choosing an order)
+
+#### Distributed File Systems and Databases (Hierarchical)
+- Allow disconnected operations (Specialized Conflict resolution system level or application level
+- Antiquity is a wide-area distributed storage system designed to handle multiple server failures. It uses a secure log to preserve data integrity,
+replicates each log on multiple servers for durability, and uses Byzantine fault tolerance protocols to ensure data consistency
+- Bigtable is a distributed storage system for managing structured data. It maintains a sparse, multi-dimensional sorted map and allows applications 
+to access their data using multiple attributes
+
 ## *System Architecture*
 
 1. *Interface:* put(key, value, context), 
