@@ -28,3 +28,13 @@ Data model is key-value based. e.g. Id -> to a an object or an employee mapping.
 Many services shoping cart, session management, sales rank, product catalog - need only primary key access, using RDBMS would lead to
 inefficiencies and limit scale and availability. e.g. Dynamo provides a primary key interface. 
 * Dont need complex quering and management functionality provided by RDBMS. The extra functionality requires expensive hardware and skilled personnel
+
+
+## Replica Synchronization
+Many systems traditionally use Synchronous replica coordination in order to provide strongly consistent data accesss interface, but they have to tradeoff 
+availability. 
+- We could follow **EventualConsistent Model** (Optimistic Replication techniques). This might lead to conflict
+  1) When to resolve Conflict (during read or write)
+  2) Who performs the process of conflict resolution
+      * Data Store  (Limited choices - Last writer wins)
+      * Application (Morre vsibility)
