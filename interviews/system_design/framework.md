@@ -34,3 +34,11 @@ More details here [Replica Sync](./tradeoffs.md/#replica-synchronization)
   - During Read/Write
   - Vector clocks
   - R, W quorum
+
+
+#### Notes
+- Focus on core of the problem
+- Capacity planning only if needed
+- Talk about internals e.g. DB internals
+- Talk about Network protocols
+- Trade offs
