@@ -33,8 +33,21 @@ More details here [Replica Sync](./tradeoffs.md/#replica-synchronization)
   - At Client level - more control
   - During Read/Write
   - Vector clocks
-  - R, W quorum
+  - R, W quorum (R+w>N)
 
+### Failure Recovery
+#### Temporary Failures
+- Hinted Handoff (separate DB to store temp state)
+#### Permanent Faliures
+- Replica Synchronization
+- Merkle Tree
+  - hash of keys at the leaves, parent is hash of children
+  - Saves on Data transfer and computing the diff/drift
+  - Drawback - when a new node joins, there is a lot of diff.
+
+### Membership & Failure Detection
+- Gossip based failure detection
+- Explicit removal
 
 #### Notes
 - Focus on core of the problem
