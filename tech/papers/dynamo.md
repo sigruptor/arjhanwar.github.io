@@ -101,6 +101,22 @@ to access their data using multiple attributes
         2. Gossip based failure view bw all the nodes..but with external discovery it was not needed. Local view of failures was sufficient.
 10. *Adding removing Storage Nodes :* Bootstrapping, it is assigned a set of keys and the other nodes leave the control of those keys. Helps in uniform load distribution 
 
+
+## Implementation
+3 components - Request Coordination, Data Persistence Engine and Membership & Failure Detection
+#### Data Persistence Engine
+- Different plugins for different databases in the backend
+- This allows to configure and use specific databases based on usage pattern - e.g. MySQL for objects with larger size which other DB which is good for sizes < KB (BDB - Berkeley Database)
+
+#### Request Coordination
+- State Machine with all the states
+  - Identifying key nodes for corresponding key
+  - Sending the requests
+  - Waiting for responses, retries
+  - Processing replies and responding to client
+- Read Repaiirs for stale version
+- Version reconciliation
+
 ## Problem	Technique	Advantage
 Partitioning	Consistent Hashing	Incremental Scalability
 HA for writes	Vector clocks with reconciliation during reads	Version size decoupled from update rates
@@ -120,7 +136,6 @@ Scalable and robust Solutions for
 * Request marshalling, request routing
 * Monitoring and alarming
 * Configuration management
-
 
 
 ## *Experiences and lessons learned*
