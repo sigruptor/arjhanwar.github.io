@@ -38,3 +38,29 @@ availability.
   2) Who performs the process of conflict resolution
       * Data Store  (Limited choices - Last writer wins)
       * Application (Morre vsibility)
+
+## Distributed File System vs Database vs Object Store
+
+#### File System
+- Files are stored in hierarchical manner, system manages an index.
+- But only on the names of the files not on the content of the files.
+- Coupled with OS
+- A file system is a software application that organizes and maintains files on a storage device. It manages the storage and retrieval of data.
+- Support for complex transaction is difficult
+- Allows random access to data and update of the file
+
+#### Databases
+- Storage engine - file system abstracted away (database could be above a particular file system). A database management system (DBMS) provides an 
+abstract representation of data that conceals the specifics.
+- A database management system, or DBMS, is a software application that allows you to access, create, and manage databases.
+- The database is a software application and is not shipped as a part of the operating system (its a 3rd party software). It is more about 
+organizing the data and implementing techniques to keep the data consistent and to have faster access to the data.
+- Has support for complex transaction
+- ACID properties
+- For object storage -> have to overwrite the file/object.
+
+#### DFS vs Object Storage
+- DFS allows random read/write of object, Object store only allows entire read/replacement of object
+- DFS hierarchial, object Store (key-value)
+- DFS can support Eventual and Strong consistency, Object store mostly supports eventual consistency.
+- DFS posix file system api (or feels like a normal FileSystem call), Object Store usually rest api.
