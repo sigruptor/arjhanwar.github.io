@@ -13,7 +13,7 @@ As a backend engineer, I have worked on a variety of projects consisting of diff
 
 **[Health - Blood Count](health/blood_count.md)**
 
-**[Interview - Preparation](interviews/datastructures/sorting_algos.md)**
+**[Interview - Preparation](interviews/overall_plan.md)**
 
 **[Sustainability](sustainibility/food/sustainable_eating.md)**
 
