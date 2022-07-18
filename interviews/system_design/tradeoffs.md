@@ -64,3 +64,63 @@ organizing the data and implementing techniques to keep the data consistent and 
 - DFS hierarchial, object Store (key-value)
 - DFS can support Eventual and Strong consistency, Object store mostly supports eventual consistency.
 - DFS posix file system api (or feels like a normal FileSystem call), Object Store usually rest api.
+
+
+## gRPC vs REST
+There are two primary models for API design: RPC and REST. Regardless of model, most modern APIs are implemented by mapping them in one way or another to the same HTTP protocol. 
+3 ways to use HTTP
+1) REST
+2) gRPC
+3) OpenAPI
+
+
+### gRPC
+- Based on RPC Api construct that uses HTTP2.0 as its underlying transport protocol
+- gRPC: addressable entities are procedures (data is hidden behind procedures)
+- Stubs are generated - code generation and strict specification
+- HTTP model is hidden 
+
+#### Useful
+- Microservices Enviroment: low latency, 
+- P2p real time communication: gRPC has excellent support for bi-directional streaming. gRPC services can push messages in real-time without polling
+- Ployglot environment: diff languages 
+- Network constrained environments: gRPC messages are serialized with Protobuf, a lightweight message format. A gRPC message is always smaller than an equivalent JSON message.
+- Inter-process communication (IPC): IPC transports such as Unix domain sockets and named pipes can be used with gRPC to communicate between apps on the same machine. 
+
+#### Not so useful
+- Not human readable
+- No browser support
+- While HTTP request is easier to make (Browser or curl), requires code generatation.
+- It’s simple to write a bot that crawls the entirety of a REST API without metadata, similarly to the way a browser or a web bot can crawl the entire HTML web. You can’t do this with an RPC-style API, regardless of whether it’s described using gRPC or OpenAPI, because RPC gives each entity type a different API that requires custom software or metadata to use it. I
+- Does not define a mechanism to do partial updates (HTTP define a PATH method for partial updates)
+- Does not define a standard mechanism to prevent data loss when 2 clients update the same resource at same time. HTTP defines standard Etag and If-Match headers for this purpose
+
+### HTTP
+- Addressable entities are data entities (called resources), behaviour is hidden behind data - CRUD.
+- usually following REST standard for API definitions
+- Browser supported.
+- JSON schema model
+
+#### Useful
+- Usually used to expose an end point to external clients
+- More standard tools for HTTP/REST
+- Simple browser or curl command
+- apis are proxied to add security features/input validations, parsing or modifying the headers, its hard to proxy gRPC (though Envoy supports this)
+
+#### Not so useful
+- HTTP with json model, 
+  - json is hard to standardize - might break backward compatibility (protobuf on other hand supports backward compatibility
+  - JSON model is verbose and less efficient
+
+| Feature	| gRPC  |	HTTP APIs with JSON |
+| ------  | ----- | ------------------- |
+Contract	| Required (.proto)	| Optional (OpenAPI)
+Protocol	| HTTP/2 |	HTTP
+Payload	  |Protobuf (small, binary)	| JSON (large, human readable)
+Prescriptiveness	| Strict specification	| Loose. Any HTTP is valid.
+Streaming	| Client, server, bi-directional	| Client, server
+Browser support |	No (requires grpc-web)	| Yes
+Security	| Transport (TLS)	| Transport (TLS)
+Client code-generation	|Yes |	OpenAPI + third-party tooling
+
+
