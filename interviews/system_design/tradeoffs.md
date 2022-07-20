@@ -1,5 +1,11 @@
 # Trade Offs
 
+1. RDBMS vs Non-RDBMS
+2. Distributed File System vs Database vs Object Store
+3. gRPC vs REST
+4. Protobuf vs Avro vs JSON vs Flatbuffer
+
+
 ## RDBMS vs Non-RDBMS (Key-Value store)
 
 ### RDBMS - SQL style
@@ -123,4 +129,52 @@ Browser support |	No (requires grpc-web)	| Yes
 Security	| Transport (TLS)	| Transport (TLS)
 Client code-generation	|Yes |	OpenAPI + third-party tooling
 
+## Protobuf vs Avro vs JSON vs Flatbuffer
+### Protobuf
+- By Google
+- Binary serialization format, Binary serialization is faster than plain text serialization
+- All the fields are optional
+- Backward compatible
+- Need proper tools to analyze this 
+- **Schema management **: is much simpler, though there is extra boilerplate code cost we need to pay, but it essentially separates the s(d)erialization logic from domain
+- Great support for multiple languages - Ruby, Java, python
+- Good for complex modelling
 
+### JSON
+- Open shared file format (Javascript object notation)
+- Human Readable
+- Plain text, easy to read but not as compressable as binary format and requires more storage.
+- Already many tools available
+- 
+
+### AVRO
+- Apache Avro
+- It uses JSON for defining data types and protocols, and serializes data in a compact binary format
+- Need to provide the schema to reader and writer for deserialization. Schema registry is useful
+- **Schema Management:** Avro can leak into your domain. Some constructions like e.g. a map with keys that are not strings are not supported in Avro model. When the serialization mechanism is forcing you to change something in your domain model — it’s not a good sign.
+- have great support in Java
+- Great for simple modelling
+- Unified storage of schema and data, self-describing messages, no need to generate stub code (support for generating IDL)
+- RPC calls exchange schema definitions during the handshake phase
+- Schema definitions allow to define the ordering of the data (which will be followed when serializing)
+
+### Flatbuffer
+- By facebook
+- Memory efficient, zero copy
+- Would allow you to read specific fields without having to deserialize the entire object.
+
+#### Schema Evolution
+- Backward compabitibility is needed for reading older version of events
+- Forward compatibility is needed for rolling updates
+
+
+
+|Type  | Proto | Avro | JSON | Flatbuffer |
+| -----| ------| ---- | -----| ---------- |
+| Format| binary| Json but binary serialization | plain text | 
+| Serialization Speed | Almost same as avro | Almost same as proto | Json is slow (plain text serialization) | 
+| Size | Comparable with Avro | Comparable with proto | Much larger | 
+| Compressable| yes | yes | not really | 
+| Schema Evolution | Backward and forward compatibility (also fields are optional) | compatible (default values) slightly challenging than proto | Code needs to be updated to handle the json schema updates |
+| Schema Management | Supports all data types | good for simple types, some complex types makes it challenging and info spills into domain |
+| Language | Java, Python, Ruby, Go, Rust, CPP | Mostly Java & CPP | |
