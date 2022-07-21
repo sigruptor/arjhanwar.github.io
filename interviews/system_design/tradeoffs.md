@@ -70,6 +70,12 @@ organizing the data and implementing techniques to keep the data consistent and 
 - DFS hierarchial, object Store (key-value)
 - DFS can support Eventual and Strong consistency, Object store mostly supports eventual consistency.
 - DFS posix file system api (or feels like a normal FileSystem call), Object Store usually rest api.
+- DFS probably not so great for millions of small files - metadata little tricky to manage
+- Object store slightly cheaper than DFS per/Gbs.
+- DFS: Posix file system vs ObjectStore: Rest Api
+- DFS can act as a backend for data storage, good for random reads/writes.
+- Object storage, on the other hand, is more suitable for acting as a repository or archive of massive volumes of large files and comes at a significantly lower price 
+- Speed: Data retrieval with object storage is faster. As you’re dealing with chunks of unstructured data on an individual basis, there is no directory system to create a bottleneck.
 
 
 ## gRPC vs REST
