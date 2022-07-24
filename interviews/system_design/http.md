@@ -43,8 +43,12 @@ abusive traffic (data exfiltration, attacks). But quic blocks the ability to ins
 - However, since its in user space its gonna be challenging to have a common standard across diff applications/deployments.
 
 
+### WebSockets
+
 
 ##### Resources
 1. https://blog.cloudflare.com/http3-the-past-present-and-future/
 2. https://www.wallarm.com/what/what-is-http-2-and-how-is-it-different-from-http-1
 3. https://www.akamai.com/blog/performance/http3-and-quic-past-present-and-future
+4. https://ably.com/topic/http-2-vs-http-3
+5. https://ably.com/topic/websockets
