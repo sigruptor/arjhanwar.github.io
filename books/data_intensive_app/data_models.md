@@ -89,4 +89,59 @@ any changes to queries.
 - They internally maps the query to execute parallely,
 - Declarative languages have better chance of getting faster in parallel execution because they control the algorithm to determine those results.
 
+### Graph Databases
+If data model does require relationship between records, document model works great. However if there are many-many relationships, relational model 
+can handle simple cases of many-many relationship, but as connections become complex -> Graph databases can be handy.
+
+- Vertices (Nodes, entities) : people, location, noun etc. {id, set of outgoing edges, set of incoming edges, key-valye properties}
+- Edges (arc): relationships, links, railwaylines {id, source_vertex, end_vertex, label, collection of properties}
+- Well known algorithms can operate on a graph - shortest path search.
+- Graphs provide a way to model homogeneous data as well completely different type of data e.g.
+
+1. Vertex can connect to any other vertex, no schema or restrictions that restricts what all vertices can be connected.
+2. Given any vertex, you can find both incoming and outgoing edges, indexes are built on source_vertex and end_Vertex.
+3. Using different labels for different relationships, you can keep different kind of info in a single graph, while still maintaining a clean model.
+4. It provides a great deal of flexibility for data modelling which is difficult to express in relational schema.
+5. Graphs are good for `evolvability`, it can easily be extended to accomodate changes in your application's data structure.
+
+##### Queries
+1. Cypher Query Language : declarative
+2. Graph Queries in SQL : Graphs can be modelled in Relational tables and can be queried using SQL.
+  - But queries become very complex 
+3. Triple Stores and SparkQL (sparkle) -> 
+  - Subject, predicate and Object (triplet)
+**  - Semantic Web**: Websites already publish info as text/images, it suggests that websites should publish info as machine-readable data for computers to read.
+    - RDF (resource description framework) - mechanism for diff websites to publish data in a consistent format, so that different websites can be combined
+    into a web of data. XML adheres to it to some extent
+
+##### Comparison with Network Model (Codasyl)
+1. Database had a schema, records nested into each other. In graph database no restriction between vertex and edges. More felxibility for applications.
+2. Only way to reach a particular records was to traverse through access paths, in graph database, you can refer directly to any vertex by an ID. Indexes can be built to find vertices with a particular value.
+3. Queries are imperative, in graph databases there are declarative (Can be imperative as well)
+4. Graph vertices and edges are not ordered, only ordering is done during the result time.
+
+### Summary
+Data started with one hierarchical view, but it was not good for representing many-many relationships, thats where relational model solved the problem.
+However it was realized that some applications dont fit well in relational model so NOSQL was invented
+- Document Databases: data comes in self contained documents and relationships between documents are rare.
+- Graph databases: targeting use cases where anything is potentially related to anything.
+
+Each model is widely used and one model can be emulated in other (graph can be represented as relational tables), but result is awkward and querying them
+becomes super complex. So no one-size fits all.
+One thing common between graph and document store is that they dont enforce any schema, which makes it easier to adapt applications to changing requirements. However application has to assume certain structure so either explicit (enforced on write) or implicit (handled on read).
+Each data model has its own query language - SparkQL, SQL, Map-Reduce. Also there are 
+- imperative language: users define the instructions to execute a particular task, system follows user code step by step. Users have to optimize the program so as to make sure results are obtained optimally.
+- Declarative languages: Users just declare the query, system figures out how to execute the query. Application developers need not worry about 
+ - Underlying storage changes
+ - Parallelism, engine itself parallizes the execution
+ - Underlying implementation can be optimized/changed without any changes to application.
+
+
+Though these models cover a wide variety of applications but some applications are still not possible to model with these:
+1. Genome data to perform sequence similarity searches. Matching it against large database of strings where it is looking for similar and not identical.
+2. Particle physicists - big data-style large-scale data analysis. Custom solutions to stop hardware cost from spiraling out of control.
+3. Full text search, information retrieval - indexes.
+
+
+
 
