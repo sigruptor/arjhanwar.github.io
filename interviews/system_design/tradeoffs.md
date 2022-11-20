@@ -7,6 +7,10 @@
 
 
 ## RDBMS vs Non-RDBMS (Key-Value store)
+3 params to consider
+1. Application code complexity
+2. Schema flexibility
+3. Data Locality for Queries
 
 ### RDBMS - SQL style
 Data Model is schema based e.g. Employee having attributes like address, designation (which could be separate schemas as well). And query model is primary key + secorndary key or a combination with filtering criterias (like where designation = VP). These models require 
