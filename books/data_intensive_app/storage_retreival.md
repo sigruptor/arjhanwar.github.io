@@ -114,13 +114,14 @@ a certain edit distance. Usually SSTAbles - sparse inmemory index with a collect
 ###### Keeping everything in memory
 This is a faster solution as system does not have to figure out the encoding-in memory data structure into disk. This can be made to work with WAL and 
 recovering from logs when the system crashes.
-Redis allows you to store SOrted Sets or priority queues directly as in-memory implementation is simple.
+**Redis allows you to store SOrted Sets or priority queues directly as in-memory implementation is simple.**
  
 #### Considerations
 1) Does data fit into memory ? 
 2) Is load read-heavy or write heavy ?
 3) Are the updates more frequent to a particular set of keys ?
 4) Handling the writes in sequential order ?
+5) If in-memory index is enough, would provide a lot of advantages (storing priority queue directly)
 
 
 
