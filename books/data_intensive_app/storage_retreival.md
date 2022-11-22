@@ -116,6 +116,63 @@ This is a faster solution as system does not have to figure out the encoding-in 
 recovering from logs when the system crashes.
 **Redis allows you to store SOrted Sets or priority queues directly as in-memory implementation is simple.**
  
+
+### Transactional Processing & Analytics
+OLTP - online Transaction Processing, Bank transctions, game etc..Applications are mostly interactive, user queries a bunch of records, read/update them.
+OLAP - Online Analytical Processing - databses being used for analytics. These queries instead of returning raw data would read entire database and return
+aggregates (sum, avg etc.)
+
+| Property      | Transactional Processing System OLTP  | Analytic Systems (OLAP) |
+| ----------- | ----------- | ----------- |
+| Main Read Pattern      | Small number of records per query, fetched by keys       |   Aggregate over large number of records          |      
+| Main Write Pattern   | Random-access, low-latency writes from user input        | Bulk import (ETL) or event stream |
+| Primarily Used By   | End user/customer via web app        | Internal analyst for decision support | 
+| What data represents   | latest state (current point in time)        | history of events that happened over time | 
+| Dataset Size   | GBs to TBs        | TBs to PBs | 
+
+### Data Warehousing
+Databases for analytical processing are called datawarehouse. OLTP systems are to be highly available, low latency systems, often critical to the business. Doing analytical processing on these potentially impacts the performance & experience of the user. So having separate OLAP is useful.
+
+Ecommerce -> Service (Sales DB) -> Extract -> transform -> load - data warehouse
+Stock app -> Stock Service (inventory DB) -> Extract -> transform -> load - data warehouse
+
+Having a separate DB allows for optimization of system for analytical queries.
+
+#### Column Oriented Storage
+Relational database stores data in a row i.e. entire row is stored on the DB together. Useful when entire row is needed for queries (useful in Business use cases). However for analytical purposes, only certain columns are needed to be fetched together. With relational model, query needs to load everything in memory, filter and return the result. e.g. `Select facts, week from Table`, queries like `Select * from table` are not common for analytical purposes.
+
+Idea is to not store entire row together, but store values from each column in the same file. e.g table with 5 columns (product, customer, price...), it will be stored in 5 files for one column each. Each file would store the same row at the same line number e..g 5th row of each file would represent the detail about the same transaction/entity. 
+Storing in a column oriented manner allows:
+1. query efficiently for analytical purposes, where you only need to read specific files.
+2. You could enable column compression (Bitmap encoding - you dont need to store all the values, e.g. billion rows might have fixed set of values around 200, it could be encoded in bitmap. Moreover Runtime encoding on it can add to optimizations further.
+3. This allows for very efficient filtering (you could just AND/OR the results of bitmaps)
+4. e.g. Parquet, cassandra
+
+##### Sort Order
+Data can be sorted based on column values, this can add to more optimizations (compression)
+- You could have different sort orders.
+- However writing can be combersome, but we can combine this with in-memory LSM/BTrees.
+
+### Summary
+There are 2 types of storage engines.
+1. OLTP (Online Transactional processing): 
+- User facing, they see a huge volume of request
+- Only a few set of records are relavant for each query.
+- Application records query based on a key, and an index is usually used to answer that query.
+- Data seek time is often the bottleneck here.
+2. OLAP (Online Analytical Processing):
+- Data warehouse, used by analytics and not by end users.
+- VOlume of query is not as much but each query involves reading millions of rows/columns in a short time.
+- Disk bandwidth (not seek time) is often the bottleneck here, column oriented storage is a proper solution for these workloads.
+
+OLTP has 2 schools of engines
+1. Log Structured: aPpend only system, never updates a file that is already written,
+- LSM trees, Cassandra, Hbase, Lucene are examples
+2. Update-in place: treats disk as a set of fixed size pages that can be overwritten
+- BTrees used in all major relational databases.
+
+When queries require sequentially scanning cross a large number of rows, indexes are much less relevant. It becomes important to encode the data and minimze the amount of data query needs to read from disk.
+ 
 #### Considerations
 1) Does data fit into memory ? 
 2) Is load read-heavy or write heavy ?
