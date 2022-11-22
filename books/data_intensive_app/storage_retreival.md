@@ -82,10 +82,40 @@ Reliable:
 - However some operation require several different pages to be overwritten.
 - FOr updating pages, some latches (light weigth locking) 
 
+Optimizations:
+- Not all keys need to be stored
+- Keys on the leaf node are kept sequentially this helps with a) Range queries b) Data is usually requested in a batch.
+- Instead of overwriting, a new page is created (snapshot isolation)
+
 #### Comparison BTrees vs LSM Trees
+LSM Trees are said to be faster for writes, while BTrees are said to be faster for reads (however this depends on the workload).
+
+- THey have less write amplification factor (for SSDs, even overwriting requires entire block to be re-written, and SSD have fixed number of writes).
+- FOr compaction, the Segments written are sequential (faster than random writes on magnetic disks as well)
+- BTrees usually leave some fragmented space
+- Compaction process can sometime interfere with performance of ongoing reads and writes. 
+- SSTables does not throttle the write requests
+- BTrees key exists exactly at one place in the index - useful for databases where transactional semantics are needed.
 
 #### Other Indexing Structures
+For relational databases, BTrees, SSTables can be used as secondary indexes. 
+1. Clustered Index: Value is stored in the index itself, reads are much faster this way.
+2. NonClustered Index: Value is not stored in the index, rather the pointer to the row is stored. This way row need not be duplicated during writes, 
+however during reads, there is one extra hop
 
+###### Multi-Column Index
+Index with multiple columns, designed to serve very specific queries.
+- Location indexes (R Index) : usually 2 dimensional location is converted into a single number.
+
+###### Full Text/Fuzzy indexes
+Where the word that is searched is not exactly the same, the goal is to retrieve similar words or synonyms. **Lucene** is able to search the words upto
+a certain edit distance. Usually SSTAbles - sparse inmemory index with a collection of keys. However, in Lucene, in-memory index is a finite state automatan over the characters of a key (Trie)
+
+###### Keeping everything in memory
+This is a faster solution as system does not have to figure out the encoding-in memory data structure into disk. This can be made to work with WAL and 
+recovering from logs when the system crashes.
+Redis allows you to store SOrted Sets or priority queues directly as in-memory implementation is simple.
+ 
 #### Considerations
 1) Does data fit into memory ? 
 2) Is load read-heavy or write heavy ?
