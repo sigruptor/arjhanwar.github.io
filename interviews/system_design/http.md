@@ -70,6 +70,16 @@ While both server push in HTTP/2 and WebSockets allow the server to initiate the
 
 So while server push and WebSockets share some similarities in their ability to initiate data transfer from the server, they are designed for different use cases and work in different ways.
 
+**Q: Difference between long polling and server push ?**
+Long polling and server push are both techniques used to achieve real-time, asynchronous communication between a client and server, but they differ in how they work.
+Long polling involves the client making a request to the server, and the server holding onto the request until new data becomes available. When new data is available, the server responds to the client with the new data, and the client immediately makes another request to the server. This process continues indefinitely, allowing for real-time communication between the client and server.
+
+Server push, on the other hand, involves the server proactively sending data to the client without the client first making a request. The server can push data to the client that is likely to be needed, such as CSS and JavaScript files, images, and other resources.
+The main difference between long polling and server push is in how the data is transferred. Long polling requires the client to repeatedly make requests to the server, which can result in a large number of requests being made and processed. Server push, on the other hand, proactively sends data to the client, which can reduce the number of requests and improve efficiency.
+Another difference is in how they handle network latency. With long polling, if the response from the server is delayed due to network latency or other factors, the client must wait for the response before making another request. With server push, data is sent proactively, so the client does not have to wait for a response.
+
+Overall, long polling and server push are both techniques used for real-time communication between the client and server, but they work in different ways and are better suited to different use cases. Long polling is useful for situations where real-time communication is needed but the data transfer is infrequent, whereas server push is useful for situations where the server can proactively send data to the client that is likely to be needed.
+
 
 ##### Resources
 1. https://blog.cloudflare.com/http3-the-past-present-and-future/
