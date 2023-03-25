@@ -58,13 +58,6 @@ _**NOTE:**_
 Now that we have a fully functional database, we are able to scale and serve all the clients. But the problem is, the system is slow whenever service has
 to fetch data from Cache.
 
-##### B-Tree vs B+-Tree
-B-trees are better than B+ trees in scenarios where the data is stored in memory or where the data items are very small. This is because B-trees store both keys and data in the same node, whereas B+ trees only store keys in the inner nodes and data in the leaf nodes. Since B-trees store both keys and data in the same node, they require fewer disk accesses than B+ trees to access a particular data item.
-
-On the other hand, B+ trees are better than B-trees in scenarios where the data is stored on disk or when the data items are large. This is because B+ trees have a more efficient node structure for storing and retrieving large data items. B+ trees only store keys in the inner nodes, which makes them more compact and allows more keys to fit in memory. Additionally, B+ trees have a more balanced distribution of data among the leaf nodes, which reduces the number of disk accesses needed to retrieve a particular data item.
-
-In terms of usage, B-trees are often used in main-memory databases and file systems, while B+ trees are commonly used in disk-based databases and file systems. B-trees are also used in many general-purpose programming languages and libraries, such as the C++ STL map and set containers. Meanwhile, B+ trees are commonly used in relational database management systems (RDBMS) such as Oracle, MySQL, and PostgreSQL.
-
 #### Caching
 In memory cache solutions - Memcache (scales very easily )or Redis (Redis also provides persistent layer)
 
@@ -80,4 +73,20 @@ Some ideas of objects to cache:
 #### Asynchronism
 Style 1: You do the precomputation in advance (may be at night, or regularly via a cron job) and when the user requests comes, that can be served. e.g. Converting dynamic content of website into html pages on every change. </br>
 Style 2: When a user submits a job e.g. a compute intensive task, the task can be added to the queue and worker queue can handle it. While this task is handled by the backend, user should still be able to navigate and do other things rather than to just wait and sit idle. </br>
+
+#### B-Tree vs B+-Tree
+B-trees are better than B+ trees in scenarios where the data is stored in memory or where the data items are very small. This is because B-trees store both keys and data in the same node, whereas B+ trees only store keys in the inner nodes and data in the leaf nodes. Since B-trees store both keys and data in the same node, they require fewer disk accesses than B+ trees to access a particular data item.
+
+On the other hand, B+ trees are better than B-trees in scenarios where the data is stored on disk or when the data items are large. This is because B+ trees have a more efficient node structure for storing and retrieving large data items. B+ trees only store keys in the inner nodes, which makes them more compact and allows more keys to fit in memory. Additionally, B+ trees have a more balanced distribution of data among the leaf nodes, which reduces the number of disk accesses needed to retrieve a particular data item.
+
+In terms of usage, B-trees are often used in main-memory databases and file systems, while B+ trees are commonly used in disk-based databases and file systems. B-trees are also used in many general-purpose programming languages and libraries, such as the C++ STL map and set containers. Meanwhile, B+ trees are commonly used in relational database management systems (RDBMS) such as Oracle, MySQL, and PostgreSQL.
+
+#### LSM-Trees
+LSM trees (Log-Structured Merge trees) are another type of data structure that is commonly used in database management systems for high-write workloads. LSM trees are similar to B-trees and B+ trees in that they are used for indexing and searching large amounts of data, but they differ in their design and performance characteristics.
+
+The main advantage of LSM trees is their ability to handle high-write workloads by minimizing the number of disk seeks required to write data to the underlying storage medium. LSM trees store new data in an in-memory buffer (called a memtable), which is periodically flushed to disk when it becomes full. When the memtable is flushed to disk, it becomes an immutable sorted file called a sstable (Sorted String Table). As new data is written to the memtable, old sstables are merged together to form larger sstables, which are then merged with even larger sstables, and so on.
+
+This merging process allows LSM trees to quickly and efficiently handle high-write workloads, but it can also result in slower read performance compared to B-trees and B+ trees. This is because LSM trees may require more disk seeks to read data due to the large number of sstables that need to be searched. However, some optimizations such as bloom filters and partitioned merge can improve read performance in LSM trees.
+
+LSM trees are commonly used in distributed databases and other systems that require high-write throughput, such as time-series databases, key-value stores, and search engines. They are also used in several popular open-source databases, including Apache Cassandra and RocksDB.
 
