@@ -44,6 +44,22 @@ abusive traffic (data exfiltration, attacks). But quic blocks the ability to ins
 
 
 ### WebSockets
+WebSockets can be a better choice when:
+
+1. Real-time communication is the primary use case: WebSockets were designed specifically for real-time communication and are optimized for low latency and high throughput. If real-time communication is the primary use case, WebSockets may provide better performance and flexibility than HTTP/2.
+2. Compatibility with older browsers is required: While HTTP/2 is supported by most modern web browsers, older browsers may not support it. WebSockets have broader support across a wider range of browsers, which can be important in some scenarios.
+3. Full-duplex communication is required: While HTTP/2 supports bidirectional streaming, it is still based on the request/response paradigm of HTTP, which means that it may not be as efficient as WebSockets for full-duplex communication.
+
+HTTP/2 can be a better alternative to WebSockets when:
+
+1. Compatibility with existing infrastructure is important: HTTP/2 is built on top of the HTTP protocol, which means that it can be used with existing infrastructure and does not require separate ports or protocols.
+2. Security is a concern: HTTP/2 includes several security features such as server push and header compression that can improve the security of web applications.
+3. High volume data transfer is required: HTTP/2 uses a binary format for data transfer, which is more efficient than the text-based format used in WebSockets. This means that HTTP/2 can handle larger volumes of data and can provide better performance in high-traffic scenarios.
+
+In HTTP/2, bidirectional communication is achieved through a single TCP connection, with both the client and server able to send multiple requests and responses at the same time. The requests and responses can be interleaved on the same connection, which allows for full-duplex communication. However, because HTTP/2 is still based on the request/response paradigm of HTTP, it may not be as efficient as WebSockets for full-duplex communication.
+
+WebSockets, on the other hand, are specifically designed for full-duplex communication. When a WebSocket connection is established, the client and server can send messages to each other at any time, without having to wait for a request or response. This makes WebSockets more efficient than HTTP/2 for full-duplex communication.
+
 
 
 ##### Resources
