@@ -2,7 +2,7 @@
 
 First need to figure out the requirements and assumptions. 
 ## Requirements/Assumptions
-- Size of the data to be persistent in DB (persistent store)
+- Size of the data to be persisted in DB (persistent store)
 - Number of users ?
 - Consistency guarantees ? 
 - Is Data loss okay or what could be the SLA ? - its expensive to improve a system beyond certain threshold without much signifant benefits.
