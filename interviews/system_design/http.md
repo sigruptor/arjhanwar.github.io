@@ -80,6 +80,15 @@ Another difference is in how they handle network latency. With long polling, if 
 
 Overall, long polling and server push are both techniques used for real-time communication between the client and server, but they work in different ways and are better suited to different use cases. Long polling is useful for situations where real-time communication is needed but the data transfer is infrequent, whereas server push is useful for situations where the server can proactively send data to the client that is likely to be needed.
 
+**Q Some real world use cases for WebSockets**
+WebSockets are widely used in a variety of real-world applications for building real-time, interactive, and collaborative web applications. Here are some examples of how WebSockets are used:
+- Chat applications: WebSockets are commonly used for building chat applications. WebSockets provide low-latency, real-time, bidirectional communication between the client and server, which is essential for chat applications. Popular chat applications like Slack and Discord use WebSockets to provide real-time messaging.
+- Multiplayer games: WebSockets are also commonly used for building multiplayer games. WebSockets provide a fast and efficient way to exchange game state and actions between players and the server. Popular multiplayer games like Agar.io and Slither.io use WebSockets to provide real-time gameplay.
+- Real-time data visualization: WebSockets are useful for building real-time data visualization applications. For example, trading platforms use WebSockets to provide real-time updates of stock prices and other financial data. This allows traders to make informed decisions based on the most up-to-date information.
+- Collaborative document editing: WebSockets are also useful for building collaborative document editing applications. WebSockets can be used to synchronize changes made by multiple users to a document in real-time. Google Docs and Office 365 use WebSockets to provide real-time collaboration features.
+
+
+
 
 ##### Resources
 1. https://blog.cloudflare.com/http3-the-past-present-and-future/
