@@ -57,6 +57,13 @@ _**NOTE:**_
 Now that we have a fully functional database, we are able to scale and serve all the clients. But the problem is, the system is slow whenever service has
 to fetch data from Cache.
 
+##### B-Tree vs B+-Tree
+B-trees are better than B+ trees in scenarios where the data is stored in memory or where the data items are very small. This is because B-trees store both keys and data in the same node, whereas B+ trees only store keys in the inner nodes and data in the leaf nodes. Since B-trees store both keys and data in the same node, they require fewer disk accesses than B+ trees to access a particular data item.
+
+On the other hand, B+ trees are better than B-trees in scenarios where the data is stored on disk or when the data items are large. This is because B+ trees have a more efficient node structure for storing and retrieving large data items. B+ trees only store keys in the inner nodes, which makes them more compact and allows more keys to fit in memory. Additionally, B+ trees have a more balanced distribution of data among the leaf nodes, which reduces the number of disk accesses needed to retrieve a particular data item.
+
+In terms of usage, B-trees are often used in main-memory databases and file systems, while B+ trees are commonly used in disk-based databases and file systems. B-trees are also used in many general-purpose programming languages and libraries, such as the C++ STL map and set containers. Meanwhile, B+ trees are commonly used in relational database management systems (RDBMS) such as Oracle, MySQL, and PostgreSQL.
+
 #### Caching
 In memory cache solutions - Memcache (scales very easily )or Redis (Redis also provides persistent layer)
 
