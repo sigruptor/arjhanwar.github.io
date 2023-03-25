@@ -81,6 +81,32 @@ organizing the data and implementing techniques to keep the data consistent and 
 - Object storage, on the other hand, is more suitable for acting as a repository or archive of massive volumes of large files and comes at a significantly lower price 
 - Speed: Data retrieval with object storage is faster. As you’re dealing with chunks of unstructured data on an individual basis, there is no directory system to create a bottleneck.
 
+Here are some considerations for when to use a **distributed file system vs. a database:** </br>
+
+- **Data types:** If your data is primarily unstructured or semi-structured, such as files, images, videos, or log data, a distributed file system may be a better choice. On the other hand, if your data is primarily structured, such as customer records, financial data, or inventory data, a database may be a better choice.
+
+- **Consistency requirements:** If you require strong consistency guarantees and ACID transactions, a database may be a better choice. Databases provide strong consistency guarantees and allow you to enforce data integrity constraints, such as unique keys, foreign keys, and referential integrity. Distributed file systems, on the other hand, typically provide weaker consistency guarantees, such as eventual consistency or causal consistency.
+
+- **Scale requirements:** If you need to store and process large volumes of data that require horizontal scaling, a distributed file system may be a better choice. Distributed file systems are designed to scale horizontally across multiple nodes, allowing you to store and process large volumes of data. Databases can also scale horizontally, but they may require more effort to set up and maintain.
+
+- **Access patterns:** If your application requires frequent and random read/write access to the data, a database may be a better choice. Databases are optimized for handling frequent and random read/write access, and provide efficient indexing and query processing capabilities. Distributed file systems are optimized for large-scale, sequential access to data.
+
+Overall, the choice between a distributed file system and a database depends on the specific needs and requirements of your application. If your application requires storing and processing large volumes of unstructured or semi-structured data, and you don't require strong consistency guarantees, a distributed file system may be a better choice. If your application requires storing structured data with strong consistency guarantees and ACID transactions, a database may be a better choice.
+
+##### Some examples where DFS is used ?
+Some examples of how DFS (Distributed File System) is used in real-world applications:
+
+Video streaming services: Video streaming services, such as Netflix and Hulu, use DFS to store and distribute video files across multiple servers. This allows for faster access to the files and ensures that the videos can be streamed without interruptions.
+
+Online backup and disaster recovery: Companies that provide online backup and disaster recovery services often use DFS to store and distribute backup files across multiple servers. This helps to ensure that the files are safe and accessible in the event of a disaster or hardware failure.
+
+Web content management: Content management systems, such as WordPress and Drupal, use DFS to store and manage files, such as images and videos, that are used on websites. This allows the files to be easily shared and accessed by multiple users.
+
+Scientific research: Scientific researchers often use DFS to store and share large datasets across multiple servers. This allows for faster data access and processing, which is critical for many types of research.
+
+File sharing and collaboration: DFS is commonly used in enterprise environments to enable file sharing and collaboration among employees. This allows multiple users to access and edit files simultaneously, which can help to increase productivity and efficiency.
+
+
 
 ## gRPC vs REST
 There are two primary models for API design: RPC and REST. Regardless of model, most modern APIs are implemented by mapping them in one way or another to the same HTTP protocol. 
