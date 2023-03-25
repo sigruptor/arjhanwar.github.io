@@ -60,6 +60,15 @@ In HTTP/2, bidirectional communication is achieved through a single TCP connecti
 
 WebSockets, on the other hand, are specifically designed for full-duplex communication. When a WebSocket connection is established, the client and server can send messages to each other at any time, without having to wait for a request or response. This makes WebSockets more efficient than HTTP/2 for full-duplex communication.
 
+**Q: for the server push if server is sending the data without client making the request, then isn't it similar to websockets**
+
+While both server push in HTTP/2 and WebSockets allow the server to initiate the transfer of data to the client without the client first making a request, they differ in several important ways:
+Protocol: WebSockets use a separate protocol, whereas server push is built on top of the HTTP/2 protocol.
+Data transfer: With WebSockets, the client and server can send data to each other at any time, whereas with server push, the server can only initiate the transfer of data to the client.
+Connection management: With WebSockets, a dedicated TCP connection is established between the client and server, whereas with server push, data is sent over an existing HTTP/2 connection.
+Use cases: WebSockets are typically used for real-time, full-duplex communication, while server push is used to proactively send data to the client that is likely to be needed, such as CSS and JavaScript files, images, and other resources.
+
+So while server push and WebSockets share some similarities in their ability to initiate data transfer from the server, they are designed for different use cases and work in different ways.
 
 
 ##### Resources
