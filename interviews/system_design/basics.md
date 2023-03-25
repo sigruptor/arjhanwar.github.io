@@ -30,6 +30,7 @@ _**Non Relational - No SQL**_:</br>
 **2. Columnar Store:** Cassandra or HBase. Have column families which are container of rows. Dont store all values of a row together, rather store values 
 from each column together. Each column family could be a file, so we just need to query the file with relevant columns. 
 - Can do columnar compression, encoding or bloom filters for querying </br>
+
 **3. Document store**: Data is stored in documents and these documents are grouped together in collections. Each document can entirely diff structure e.g. MongoDb </br>
 **4. Graph Store: Node:** Store data whose relations are best respresented by graph. Nodes (entities, properties) and lines (relationship b/w entities). e.g. Neo4j</br>
 
@@ -42,7 +43,7 @@ from each column together. Each column family could be a file, so we just need t
 | Reliability    | ACID compliant - transactional based | Sacrifice ACID for scalablity and performance
 
 
-Use Relatinal databases: 
+Use Relational databases: 
 - When ACID compliance or financial information (Transactional based systems)
 - Data is structured and unchanging
 - E.g. CockroachDB, Google Spanner
