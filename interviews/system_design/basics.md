@@ -3,7 +3,7 @@
 Few important characteristics:
 1. Availability
 2. Reliability
-3. Scalaibility
+3. Scalability
 4. Efficiency -> Latency/Throughput
 5. Maintainability/Servicability
 
