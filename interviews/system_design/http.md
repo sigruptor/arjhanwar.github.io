@@ -88,6 +88,38 @@ WebSockets are widely used in a variety of real-world applications for building 
 - Collaborative document editing: WebSockets are also useful for building collaborative document editing applications. WebSockets can be used to synchronize changes made by multiple users to a document in real-time. Google Docs and Office 365 use WebSockets to provide real-time collaboration features.
 
 
+## Connection Options Deep Dive
+### HTTP Connections:
+
+**Basic HTTP:** Stateless protocol where each request-response cycle is independent. Not efficient for real-time communication since a new connection must be established for each request.
+
+**HTTP/2:**
+Supports multiplexing, allowing multiple requests and responses over a single connection. This can improve efficiency and reduce latency.
+Header Compression: Reduces overhead, which can improve performance.
+Still primarily a request-response model, but it can be more efficient than HTTP/1.1 for scenarios with many simultaneous requests.
+
+### WebSockets:
+
+Establishment: Begins with an HTTP handshake, which upgrades the connection to a persistent WebSocket connection.
+Data Exchange: Once established, data is sent as frames, which is lightweight compared to HTTP requests. This enables low-latency, full-duplex communication.
+Use Cases: Ideal for applications requiring real-time updates, like chat applications or notifications.
+
+### Long Polling:
+
+The client makes a request to the server, and the server holds that request open until there’s new information to send back.
+After sending the response, the client immediately sends another request, effectively simulating a persistent connection.
+Drawbacks: More overhead compared to WebSockets since it requires multiple HTTP requests and responses, leading to latency and higher resource consumption.
+
+### Server-Sent Events (SSE):
+
+One-way communication from the server to the client. The client establishes a connection and listens for messages.
+Pros: Simpler to implement for real-time updates, and it automatically handles reconnections.
+Cons: Not suitable for bidirectional communication, which can limit use cases.
+
+#### Considerations for Choosing a Connection Method
+Use Case: If you need real-time, bidirectional communication, WebSockets are your best option. For simpler one-way updates, SSE could suffice.
+Scalability: Consider how many concurrent connections you need to support. WebSockets can be more efficient at scale, but you’ll need to ensure your infrastructure can handle the load.
+Complexity: Evaluate the ease of implementation versus the requirements. HTTP/2 might be easier to integrate into existing services without substantial changes.
 
 
 ##### Resources
