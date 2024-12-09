@@ -7,10 +7,12 @@
 
 
 ## RDBMS vs Non-RDBMS (Key-Value store)
-3 params to consider
-1. Application code complexity
-2. Schema flexibility
-3. Data Locality for Queries
+5 params to consider
+1. Scalability
+2. Performance
+3. Data Model Complexity/Schema flexibility (Application code complexity)
+4. Eventual Consistency
+5. Data Locality for Queries
 
 ### RDBMS - SQL style
 Data Model is schema based e.g. Employee having attributes like address, designation (which could be separate schemas as well). And query model is primary key + secorndary key or a combination with filtering criterias (like where designation = VP). These models require 
@@ -18,17 +20,32 @@ Data Model is schema based e.g. Employee having attributes like address, designa
 - Row based storage, requires all the attributes for all the rows.
 - Consistency between diff models over availability
 - Complex machinary to compute these queries.
+**Pros**
+1. **Strong Consistency:** Ensures ACID properties (atomicity, consistency, isolation, durability). All data changes are consistent and easily queried.
+2. **Data Integrity:** Enforced relationships and constraints (e.g., foreign keys) maintain data integrity.
+3. **SQL Queries:** Complex queries, joins, and aggregations are well-supported, which is useful for generating reports or analytics (e.g., querying user messages across channels).
+4. **Mature Ecosystem:** Well-established tools for backup, replication, and monitoring.
 
-Acheiving scalability and elasticity has been a huge challenge for Relational databases. Vertical scaling is possible, but its hard to scale them horizontally. 
+**Cons:**
+1. **Scalability Issues:** Relational databases struggle with horizontal scaling, especially with large-scale applications. Vertical scaling (increasing server resources) can only go so far.
+2. **Write Performance Bottlenecks:** As user and message data grows, write-heavy operations (like inserting messages) can slow down, especially if there's heavy traffic (e.g., a message per second).
+3. **Complexity with Large Data Volumes:** Storing and querying massive amounts of data, such as chat histories, can result in performance degradation due to the complexity of SQL joins or long-running queries.
+4. Acheiving scalability and elasticity has been a huge challenge for Relational databases. Vertical scaling is possible, but its hard to scale them horizontally. 
 * Relational databases are designed to run on a single server in order to maintain the integrity of the table mappings and avoid the problems of distributed computing. With this design, if a system needs to scale, customers must buy bigger, more complex, and more expensive proprietary hardware with more processing power, memory, and storage. 
 * Today some techniquess have evolved which help scale RDBMS, using **Leader** and **follower** approach, where followers are additional servers that can handle parallel processing and replicated data. 
-* Data can be shareded, in-memory processing, better use of replicas
+* Data can be sharded, in-memory processing, better use of replicas
 * But ultimately there seems a single point of failure
 * Also replication technologies chooses consistency over availability
 * Although many advances have been made in the recent years, it is still not easy to scale-out databases or use smart partitioning schemes for load
 balancing.
 * The enhancements to relational databases also come with other big trade-offs as well. For example, when data is distributed across a relational database it is typically based on pre-defined queries in order to maintain performance. In other words, flexibility is sacrificed for performance.
 * Additionally, relational databases are not designed to scale back down—they are highly **inelastic**. Once data has been distributed and additional space allocated, it is almost impossible to “undistribute” that data.
+
+**Use Case Fit:**
+- Ideal if you need strict consistency and complex queries across relational entities (e.g., joining user data with messages).
+- Suitable for relatively lower traffic or small-to-medium scale applications, or where data integrity is a high priority.
+
+
 
 ### Non RDBMS - Key Value or No-SQL Style
 Data model is key-value based. e.g. Id -> to a an object or an employee mapping.
@@ -39,6 +56,48 @@ Many services shoping cart, session management, sales rank, product catalog - ne
 inefficiencies and limit scale and availability. e.g. Dynamo provides a primary key interface. 
 * Dont need complex quering and management functionality provided by RDBMS. The extra functionality requires expensive hardware and skilled personnel
 
+###### NoSQL Document Store (e.g., MongoDB)
+**How It Works:**
+A NoSQL document store saves data as JSON-like documents, which can be nested and vary in structure. Collections of documents can represent different entities, such as Users, Channels, and Messages.
+Example collections:
+- Users Collection: stores user data in documents, each representing a user.
+- Channels Collection: stores metadata about channels.
+- Messages Collection: stores messages and can include embedded references to users and channels.
+
+**Pros:**
+1. **Scalability:** NoSQL databases are typically designed for horizontal scaling. They can distribute data across multiple nodes seamlessly, which is ideal for growing systems.
+2. **Flexibility:** The schema-less nature allows for quick changes to data structures (e.g., adding fields to messages without migrations).
+3. **Performance for Reads/Writes:** MongoDB, for example, is optimized for fast reads and writes, especially for unstructured or semi-structured data.
+4. **Document Embedding:** You can embed related data (e.g., message history in the user document) to reduce the number of queries required.
+
+**Cons:**
+1. **Eventual Consistency:** Most NoSQL databases prioritize availability and partition tolerance (as per the CAP theorem), which can result in eventual consistency rather than strict consistency. This could cause issues when you need strong transactional guarantees (e.g., ensuring a message is always written after a channel is created).
+2. **Complex Queries:** While MongoDB and similar systems support querying, it can be harder to perform complex joins or aggregations compared to relational databases. You often need to design your schema to avoid such queries.
+3. **Data Duplication:** If you embed documents (e.g., embedding messages in channel documents), it may lead to data duplication and inefficient updates.
+
+**Use Case Fit:**
+1. **Best for Scalability:** If you're expecting rapid growth and need to scale horizontally with ease.
+2. **Good for Performance-Critical Applications:** When high throughput (e.g., sending and retrieving messages quickly) and low-latency operations are crucial.
+3. **Flexible Data Models:** Ideal for systems with evolving or loosely defined schemas
+
+###### Key-Value Stores (e.g., Redis, DynamoDB)
+**How It Works:**
+Data is stored in simple key-value pairs, where the key is unique, and the value could be a string, list, or more complex data structure (e.g., sets, hashes).
+- For example, Redis can be used to store user session data, cached messages, or notification states.
+
+**Pros:**
+1. **Fast Access:** Extremely fast for read/write operations, which makes it great for caching and session management.
+2. **Scalability:** Can handle massive numbers of read and write requests due to its lightweight nature and the ability to scale horizontally.
+3. **Simplicity:** Simple to set up and use.
+
+**Cons:**
+1. **Lack of Complex Queries:** Key-value stores don't provide advanced querying or aggregation capabilities. Data modeling for complex relationships (e.g., querying all messages from a user across channels) is challenging.
+2. **Persistence Limitations:** While Redis offers persistence options (e.g., RDB snapshots, AOF), it is primarily used as an in-memory store. Storing large amounts of persistent data in Redis may be impractical.
+3. **Limited Data Model:** Not ideal for applications that need complex relationships between entities like users, channels, and messages.
+
+**Use Case Fit:**
+1. **Best for Caching and Session Management:** If you need extremely fast access to specific data, such as recent messages or user session info.
+2. **Not Ideal for Long-Term Storage:** Redis is not well-suited for long-term message storage but is a great option for frequently accessed, time-sensitive data.
 
 ## Replica Synchronization
 Many systems traditionally use Synchronous replica coordination in order to provide strongly consistent data accesss interface, but they have to tradeoff 
