@@ -30,9 +30,36 @@ nearby node in the bitcoin network. The first node to hear about the transaction
   authority or few of the powerful nodes.
 </p>
 
+<p>
+  Miners validate transactions by checking digital signatures, ensuring Yudh’s unspent funds (UTXOs) are sufficient, and preventing double spending. Miners compete to solve a computational puzzle (Proof-of-Work) by finding a hash below a target value. The first miner to solve the puzzle broadcasts the block containing the validated transactions. Other nodes verify the block and add it to their copy of the blockchain, achieving consensus across the network. This ensures a single source of truth and removes the need for central authorities
+</p>
+
+##### UTXO Validation
+Bitcoin uses a UTXO model where each transaction consumes unspent outputs from previous transactions.
+Nodes check the ledger to ensure:
+- The UTXOs referenced in Yudh's transaction exist.
+- These UTXOs have not already been spent in another transaction.
+  
+##### Double-Spend Prevention
+To ensure Yudh hasn’t already spent the same funds in another transaction:
+Nodes verify that the UTXOs referenced by the transaction are still unspent in the blockchain.
+
 #### Incentives for Miners
   Miners are awarded 12.5 bitcoins for solving the puzzle and helping validate and addition of the block. Earlier the award was 50 bitcoins, but there is a limit
   to which number of coins can be generated (22 million). Going forward reward is going to go down further and miners would just get the Tx fee, this is a big concern.
+
+### Example
+Yudh's Wallet:
+
+- Yudh has two UTXOs: 5 BTC and 7 BTC.
+- He wants to send 8 BTC to Amli.
+- The wallet constructs a transaction referencing these UTXOs as inputs.
+- Outputs: 8 BTC to Amli, 3.9 BTC back to Yudh (change), 0.1 BTC as a fee.
+
+Network Validation:
+- Nodes confirm Yudh's private key signature.
+- Nodes check that the referenced UTXOs (5 BTC + 7 BTC) exist and haven’t been spent.
+- Nodes verify the input sum (12 BTC) equals the output sum (8 BTC + 3.9 BTC + 0.1 BTC).
 
 ### Challanges
   
