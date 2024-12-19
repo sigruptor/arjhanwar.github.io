@@ -34,7 +34,7 @@ nearby node in the bitcoin network. The first node to hear about the transaction
   Miners validate transactions by checking digital signatures, ensuring Yudh’s unspent funds (UTXOs) are sufficient, and preventing double spending. Miners compete to solve a computational puzzle (Proof-of-Work) by finding a hash below a target value. The first miner to solve the puzzle broadcasts the block containing the validated transactions. Other nodes verify the block and add it to their copy of the blockchain, achieving consensus across the network. This ensures a single source of truth and removes the need for central authorities
 </p>
 
-##### UTXO Validation
+##### UTXO (Unspent Transaction Output) Validation
 Bitcoin uses a UTXO model where each transaction consumes unspent outputs from previous transactions.
 Nodes check the ledger to ensure:
 - The UTXOs referenced in Yudh's transaction exist.
